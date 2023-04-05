@@ -1,0 +1,9 @@
+---
+-  name: Create file in worker node
+   hosts: all
+   tasks:
+   -  name: create a directory
+      file:
+        path: /home/deepak/demofile.txt
+        state: touch
+     

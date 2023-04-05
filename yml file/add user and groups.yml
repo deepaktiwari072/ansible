@@ -1,0 +1,21 @@
+---
+-  name: add user and groups in centos
+   hosts: all
+   become: true
+   vars:
+     user: john
+     group: bhago
+   tasks:
+   -  name: creating group
+      group:
+        name: "{{group}}"
+   -  name: creating user using variable
+      user:
+        name: "{{user}}"
+        shell: /bin/bash
+        password: ${123}
+        groups: bhago
+        append: yes
+
+
+

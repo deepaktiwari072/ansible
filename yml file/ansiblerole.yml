@@ -1,0 +1,17 @@
+---
+-  name: ansible role
+   hosts: all
+   become: true
+   roles:
+     -  setup-httpd
+
+
+
+# create a role with the name of setup-httpd
+#  ansible-galaxy init setup-httpd
+# the go to inside setup-httpd directory
+# now you need to arrange your code accordingly
+#  copy your task inside task/main.yml
+# copy your handler inside handler/main.yml
+# copy your file inside file/ 
+# copy variable inside variable/main.yml

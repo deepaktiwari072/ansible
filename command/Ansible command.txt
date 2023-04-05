@@ -1,0 +1,103 @@
+vim /etc/ansible/hosts----------- host file where I need to mention IP of all worked node
+ansible all -m ping-------------- to ping the worker node
+
+
+ansible all -m command -a "uptime"-
+
+all- all means this command will run on all worker node which are inside hosts file
+command- means you are going to run a command
+-a - arguments you are going to use 
+"uptime"- its a command you can change it according to use
+
+
+
+state module-
+
+ansible all -m stat -a "path=/etc/hosts"
+
+the stat command is a command-line utility that provides detailed information about filesystems or files.
+
+
+ansible all -m yum -a "name=git"
+
+above command use to install git 
+
+ansible all -m user -a "name=john"
+
+above command use to create user
+
+
+ansible all -m user -a "name=john" -b -K
+
+-K- if user is getting access denied can use -K and supply password
+
+ansible all -m setup
+
+above command give all info about worker node
+
+
+Handler- Handler is use to define if example- you wanted to to start the service httpd but if service is not there you install it then start the service so u can use handler
+
+with_item- with the help of this also you can install multiple software 
+
+Tags- tags are used to run specific task under yaml file.
+       (Ex- you have mentioned multiple task in yml file but you want that only specific task to run then you can use --tags)
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                           Ansible Vault
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ansible vault is a feature of ansible that allow you to keep sensitive data such as password or keys in encrypted file rather then playbook or plain text..
+
+ansible-vault  
+
+create- to create ansible vault
+view- to view vault file
+edit- to edit vault ile
+encrypt- to encrypt unencrypted file
+decrypt- to decrypt an encrypted file
+
+need to provide option for vault password-    
+--ask-vault-pass: to provide password while running playbook
+--vault-password-file: to pass a vault password through a file
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                             Ansible Role
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+An Ansible, the role is the primary mechanism for breaking a playbook into multiple files. This simplifies writing complex playbooks, and it makes them easier to reuse. The breaking of playbook allows you to logically break the playbook into reusable components.
+
+ansible-galaxy init 
+
+above command create directory structure like---default, handler, meta, task, Template etc.
+
+Defaults:
+The defaults directory is for defining the variable defaults. The variables in default have the lowest priority thus becoming easy to override. If definition of a variable is nowhere else, the variable in defaults/main.yml will be used.
+
+Files:
+We use the files directory to add files that are needed by provisioning machine, without modification. Mostly, we use copy task for referencing files in the files directory. The most interesting part about this is that Ansible does not require a path for resources stored in files directory when working in the role.
+
+Handlers:
+The handlers directory is used for storing Ansible handlers. Handlers are tasks that may be flagged during a play to run at the play’s completion. We can have as many and as few handlers as we need.
+
+Meta:
+We use the meta directory to store authorship information which is useful if we choose to publish our role on galaxy.ansible.com. The metadata of an Ansible role consists of author, supported platforms, and dependencies.
+
+Tasks:
+The task directory is where we write most of our roles which includes all the tasks our role will perform. We write each series of tasks in a separate file and include them into the main.yml file in the tasks directory.
+
+Templates:
+We use the template directory to also add files to our machine(similar to files directory). Only difference between template and files directories is that the template directory supports alteration (modification). Jinja2 language to used to create these alteration. Most software configuration files become templates.
+
+
+
+
+
+
+
+
+
+

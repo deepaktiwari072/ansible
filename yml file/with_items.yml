@@ -1,0 +1,24 @@
+---
+-  name: create user and unistall software
+   hosts: all
+   become: true
+   tasks:
+   -  name: create user
+      user:
+        name: "{{items}}"
+        state: present
+      with_items:
+        - user1
+        - user2
+
+   -  name: unistall software
+      yum:
+       name: "{{items}}"
+       state: removed
+      with_items:
+        - git
+        - httpd
+        - nginx
+        - gzip
+
+      

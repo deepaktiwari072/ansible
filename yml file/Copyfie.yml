@@ -1,0 +1,10 @@
+---
+-  name: ansible playbook to copy file
+   hosts: all
+   tasks:
+   -  name: copy a file
+      copy:
+        src: /home/deepak/demofile.txt  # source will be controller node
+        dest: /home/deepak
+        mode: 0600
+        owner: deepak

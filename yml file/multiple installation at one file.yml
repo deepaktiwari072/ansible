@@ -1,0 +1,9 @@
+---
+-  name: install multiple software with single file
+   hosts: all
+   become: yes
+   tasks:
+   -  name: install git, nginx
+      yum:
+        name: [gzip, nginx]
+        state: installed

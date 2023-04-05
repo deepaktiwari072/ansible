@@ -1,0 +1,20 @@
+---
+-  name: install httpd with tags
+   hosts: all
+   become: true
+   vars:
+     soft: httpd
+     soft1: apache
+   tasks:
+   -  name: install httpd in RHEL
+      yum:
+        name: "{{soft}}"
+        state: installed
+      when: ansible_os_family == "RedHat"
+      tags: install httpd
+   -  name: install apache2 in Debian
+      apt:
+        name: "{{soft1}}"
+        state: present
+      when: ansible_os_family == "Debian"
+      tags: install apache2

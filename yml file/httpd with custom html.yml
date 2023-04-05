@@ -1,0 +1,29 @@
+---
+-  name: install apache in ubuntu
+   hosts: all
+   become: yes
+   tasks:
+   -  name: install apache2 in ubuntu
+      apt:
+        name: apache2
+        state: installed
+      when: ansible_os_family == "Debian"
+   -  name: start apache2
+      service:
+          name: apache2
+          state: started
+      when: ansible_os_family == "Debian"
+   -  name: install httpd
+      yum:
+        name: httpd
+        state: installed
+      when: ansible_os_family == "RedHat"
+   -  name: start httpd
+      service:
+         name: httpd
+         state: started
+      when: ansible_os_family == "RedHat"
+   -  name: copy a file
+      copy:
+        src: /opt/ansible/index.html  # source will be controller
+        dest: /var/www/html       

@@ -1,0 +1,16 @@
+---
+-  name: this is for installing nginx
+   hosts: all
+   become: yes
+   tasks:
+   -  name: install package  
+      yum:
+        name: nginx
+        state: installed
+      notify: start nginx  # once the installation complited notify handler that installation complited
+   handlers:
+   - name: start Nginx
+     service:
+        name: nginx
+        state: start
+    
